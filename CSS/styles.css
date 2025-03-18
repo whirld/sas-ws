@@ -1,0 +1,329 @@
+/* Fonts
+--------------------------*/
+@import url("https://rsms.me/inter/inter-ui.css");
+
+/* Variables
+---------------------------*/
+
+:root {
+
+    --color-teal-T1000: #052028;
+    --color-teal-T900: #054861;
+    --color-teal-T800: #0F6A80;
+
+    --color-gray-L700: #33373B;
+    --color-gray-L200: #F2F5F8;
+    --color-gray-D200: #A3A8AC;
+
+    --color-yellow-Y500: #FFB916;
+    --color-yellow-Y400: #FFCF50;
+
+    --color-red-R600: #DB4648;
+
+    --body-border: 0.6em;
+    --body-padding: 3vw;
+    --color-mode: 'light';
+    --background: var(--color-yellow-Y500);
+    --background-alt: var(--color-yellow-Y400);
+    --text-color: var(--color-gray-L700);
+    --mode-icon: '🌑';
+    --mode-icon-opacity: '1';
+    --border-color: var(--text-color);
+}
+
+/* Dark Mode
+---------------------------*/
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-mode: 'dark';
+    }
+
+    :root:not([data-user-color-scheme]) {
+        --background: var(--color-teal-T1000);
+        --background-alt: var(--color-teal-T900);
+        --text-color: var(--color-gray-L200);
+        --border-color: var(--color-teal-T800);
+        --mode-icon: '🌕';
+        --mode-icon-opacity: .85;
+    }
+}
+
+[data-user-color-scheme='dark'] {
+    --background: var(--color-teal-T1000);
+    --background-alt: var(--color-teal-T900);
+    --text-color: var(--color-gray-L200);
+    --border-color: var(--color-teal-T800);
+    --mode-icon: '🌕';
+    --mode-icon-opacity: .85;
+}
+
+/* Global
+---------------------------*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+::selection {
+    background-color: var(--color-red-R600);
+    color: var(--color-gray-L200);
+}
+
+html {
+    margin: 1vh;
+    /* delete */
+    padding: 0vh;
+    /* delete */
+    height: 100vh;
+    background-color: var(--background-alt);
+}
+
+body {
+    min-height: calc(100vh - var(--body-border)*2);
+    /* margin: 0; */
+    padding: 2.5% 2.5% 0% 2.5%;
+    /* 2.5vw 2.5vw 5vw; */
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vw;
+    background-color: var(--background);
+    border-radius: 5px;
+    font-size: 112.5%;
+    font-family: "Inter UI", Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+body.no-js {
+    padding-top: 5vw;
+}
+
+/* Header
+---------------------------*/
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    flex: 0;
+    /* 1 0 1 */
+}
+
+body.no-js .toggle-button {
+    display: none;
+}
+
+.toggle-button {
+    margin-top: auto;
+    padding: .4em .8em;
+    background-color: var(--background-alt);
+    border: none;
+    border-radius: 5px;
+    font-size: clamp(1rem, 1vw, 1.5rem);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.toggle-button::before {
+    content: var(--mode-icon);
+    opacity: var(--mode-icon-opacity);
+}
+
+.toggle-button:focus {
+    outline: none;
+    border: none;
+}
+
+.toggle-button:focus-visible {
+    outline: 2px solid var(--text-color);
+}
+
+/* Main
+---------------------------*/
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 3vw;
+    flex: 1;
+}
+
+/* Footer
+---------------------------*/
+
+footer {
+    margin-top: auto;
+    padding: 0;
+    margin-bottom: -5.6em;
+    margin-left: calc(-0.8 * var(--body-padding));
+    width: calc(100% + (1.6 * var(--body-padding)));
+}
+
+footer .bottom-border {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+}
+
+/* About section
+---------------------------*/
+
+.about {
+    flex: 1 0 1;
+    padding: 1rem var(--body-padding) 0;
+}
+
+.about .profile-img {
+    width: 80%;
+    max-width: 250px;
+    display: block;
+    margin: 1rem auto;
+}
+
+.about,
+.links {
+    border-top: 4px solid var(--border-color);
+}
+
+/* Minimum (1rem): The font size will never go below 1rem.
+  Preferred (1.5vw): This is the ideal, flexible size based on the viewport width.
+  Maximum (2.3rem): The font size will never exceed 2.3rem. */
+.about>* {
+    margin: 0 0 1rem;
+    font-size: clamp(1rem, 1.5vw, 2rem);
+}
+
+/* was   font-size: clamp(1.5rem, 2.5vw, 3.5rem); */
+.about h1 {
+    font-size: clamp(1.5rem, 4vw, 10rem);
+}
+
+.about h2 {
+    font-size: clamp(1.2rem, 2vw, 2.7rem);
+}
+
+.about ul {
+    padding-left: 1em;
+}
+
+/* Links section
+---------------------------*/
+
+.links {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+/*Adding flex: 1; makes links>a grow equally rather than sizing by content. Removing or replacing that will let them adjust naturally. */
+.links>a {
+    padding-right: var(--body-padding);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    flex: none;
+    border-bottom: 1px solid var(--border-color);
+    text-decoration: none;
+    font-size: clamp(1.5rem, 4vw, 10rem);
+    color: var(--text-color);
+}
+
+.links>a>strong {
+    padding: var(--body-padding);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    background-color: var(--background);
+    z-index: 1;
+}
+
+/*font-size: clamp(1rem, 2vw, 2rem); */
+.links>a>span {
+    position: relative;
+    line-height: 1;
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Remove if horizontal centering is not desired */
+    transition: transform 150ms ease-in-out;
+    transform: translateX(-100%);
+    z-index: 0;
+    padding: 0.5rem 1rem;
+}
+
+.links>a>strong:after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: '';
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    background-color: var(--text-color);
+    opacity: 0;
+    transition: opacity 100ms ease-in-out;
+    transform: translateY(-50%);
+}
+
+.links>a:hover>strong:after,
+.links>a:focus>strong:after {
+    opacity: .5;
+}
+
+.links>a:hover>span,
+.links>a:focus>span {
+    transform: translateX(1em);
+}
+
+.links>a:focus {
+    outline: none;
+}
+
+.links>a:focus,
+.links>a:focus>strong {
+    background-color: var(--background-alt);
+}
+
+@media screen and (min-width: 800px) {
+    main {
+        flex-direction: row;
+    }
+
+    .about {
+        flex: 0 0 38%;
+    }
+
+    .links {
+        flex: 0 0 62%;
+
+    }
+
+    .links>a>span {
+        padding: 1rem;
+        flex: 1;
+    }
+
+    .links>a>strong {
+        font-size: 0.7em;
+    }
+
+    .links>a>strong:after {
+        height: 80%;
+    }
+}
+
+@media (prefers-reduced-motion) {
+    .links>a>span {
+        transition: none;
+    }
+}
