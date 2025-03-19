@@ -1,23 +1,10 @@
-/* Inter Font connection
---------------------------*/
+/* Variables & Font (Inter)
+---------------------------*/
+
 :root {
     font-family: Inter, sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1;
     /* fix for Chrome */
-}
-
-@supports (font-variation-settings: normal) {
-    :root {
-        font-family: InterVariable, sans-serif;
-    }
-}
-
-
-/* Variables
----------------------------*/
-
-:root {
-
     --color-teal-T1000: #052028;
     --color-teal-T900: #054861;
     --color-teal-T800: #0F6A80;
@@ -29,7 +16,7 @@
     --color-yellow-Y500: #FFB916;
     --color-yellow-Y400: #FFCF50;
 
-    --color-red-R600: #DB4648;
+    --color-red-R600: #FF0000;
 
     --body-border: 0.6em;
     --body-padding: 3vw;
@@ -40,6 +27,12 @@
     --mode-icon: '🌑';
     --mode-icon-opacity: '1';
     --border-color: var(--text-color);
+}
+
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: InterVariable, sans-serif;
+    }
 }
 
 /* Dark Mode
@@ -85,25 +78,21 @@
 
 html {
     margin: 1vh;
-    /* delete */
     padding: 0vh;
-    /* delete */
     height: 100vh;
     background-color: var(--background-alt);
 }
 
 body {
     min-height: calc(100vh - var(--body-border)*2);
-    /* margin: 0; */
     padding: 2.5% 2.5% 0% 2.5%;
-    /* 2.5vw 2.5vw 5vw; */
     display: flex;
     flex-direction: column;
     row-gap: 2vw;
     background-color: var(--background);
     border-radius: 5px;
     font-size: 112.5%;
-    font-family: "Inter UI", Helvetica, Arial, sans-serif;
+    font-family: "Inter", Helvetica, Arial, sans-serif;
     line-height: 1.4;
     color: var(--text-color);
 }
@@ -119,7 +108,6 @@ header {
     display: flex;
     justify-content: flex-end;
     flex: 0;
-    /* 1 0 1 */
 }
 
 body.no-js .toggle-button {
@@ -230,7 +218,6 @@ footer .bottom-border {
     flex: 2;
 }
 
-/*Adding flex: 1; makes links>a grow equally rather than sizing by content. Removing or replacing that will let them adjust naturally. */
 .links>a {
     padding-right: var(--body-padding);
     position: relative;
@@ -255,15 +242,13 @@ footer .bottom-border {
     z-index: 1;
 }
 
-/*font-size: clamp(1rem, 2vw, 2rem); */
 .links>a>span {
     position: relative;
     line-height: 1;
     font-size: clamp(1rem, 1.5vw, 2rem);
     display: flex;
     align-items: center;
-
-    transition: transform 150ms ease-in-out;
+    transition: transform 300ms ease-in-out;
     transform: translateX(-100%);
     z-index: 0;
     padding: 0.5rem 1rem;
@@ -281,26 +266,38 @@ footer .bottom-border {
     top: 50%;
     background-color: var(--text-color);
     opacity: 0;
-    transition: opacity 100ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
     transform: translateY(-50%);
 }
 
+.links>a:focus>strong,
+.links>a:hover>strong,
+.links>a:active>strong {
+    color: var(--color-red-R600);
+    transition: color 300ms ease-in-out;
+}
+
+.links>a:active>strong:after,
 .links>a:hover>strong:after,
 .links>a:focus>strong:after {
     opacity: .5;
 }
 
+.links>a:active>span,
 .links>a:hover>span,
 .links>a:focus>span {
     transform: translateX(1em);
+    transition: transform 300ms ease-in-out;
 }
 
 .links>a:focus {
     outline: none;
+    border-bottom: 2px solid var(--color-red-R600);
 }
 
-.links>a:focus,
-.links>a:focus>strong {
+.links>a:focus>span,
+.links>a:hover>span,
+.links>a:active>span {
     background-color: var(--background-alt);
 }
 
@@ -315,7 +312,6 @@ footer .bottom-border {
 
     .links {
         flex: 0 0 62%;
-
     }
 
     .links>a>span {
@@ -329,6 +325,82 @@ footer .bottom-border {
 
     .links>a>strong:after {
         height: 70%;
+    }
+}
+
+@media (pointer: coarse) {
+
+    .links>a:active>strong,
+    .links>a:focus>strong {
+        color: var(--color-red-R600);
+        transition: var(--color-red-R600) 300ms ease-in-out;
+    }
+
+    .links>a:active>span,
+    .links>a:focus>span {
+        background-color: var(--background-alt);
+    }
+}
+
+@media (hover:none) {
+    .links>a>span {
+        transform: translateX(0) !important;
+        /*color: var(--color-red-R600);
+        background-color: var(--color-yellow-Y400);*/
+        transition: none !important;
+    }
+}
+
+/* For screen widths less than 800px, center the `strong` element */
+@media screen and (max-width: 799px) {
+    .links {
+        gap: 10px;
+        flex-direction: column;
+        flex: 0;
+    }
+
+    .links>a {
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .links>a>strong:after {
+        content: none;
+    }
+
+    .links>a>span {
+        position: relative;
+        top: -100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: var(--background-alt);
+        text-align: center;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        display: block;
+        transition: opacity 300ms ease-in-out, top 300ms ease-in-out, height 300ms ease-in-out;
+        
+    }
+
+    .links>a:focus>span,
+    .links>a:hover>span,
+    .links>a:active>span {
+        /*transform: translateY(0);*/
+        opacity: 1;
+        top: 0;
+        height: auto;
+    }
+
+    .links>a:focus,
+    .links>a:hover,
+    .links>a:active {
+        height: auto;
     }
 }
 
