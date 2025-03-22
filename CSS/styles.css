@@ -133,10 +133,12 @@ body.no-js .toggle-button {
 .toggle-button:focus {
     outline: none;
     border: none;
+
 }
 
 .toggle-button:focus-visible {
     outline: 2px solid var(--text-color);
+    color: var(--color-red-R600);
 }
 
 /* Main
@@ -196,7 +198,6 @@ footer .bottom-border {
     font-size: clamp(1rem, 1.5vw, 2rem);
 }
 
-/* was   font-size: clamp(1.5rem, 2.5vw, 3.5rem); */
 .about h1 {
     font-size: clamp(1.5rem, 4vw, 10rem);
 }
@@ -248,7 +249,7 @@ footer .bottom-border {
     font-size: clamp(1rem, 1.5vw, 2rem);
     display: flex;
     align-items: center;
-    transition: transform 300ms ease-in-out;
+    transition: transform 150ms ease-in-out;
     transform: translateX(-100%);
     z-index: 0;
     padding: 0.5rem 1rem;
@@ -266,39 +267,45 @@ footer .bottom-border {
     top: 50%;
     background-color: var(--text-color);
     opacity: 0;
-    transition: opacity 300ms ease-in-out;
+    transition: opacity 150ms ease-in-out;
     transform: translateY(-50%);
 }
 
+.links>a.focus>strong,
+.links>a.hover>strong,
+.links>a.active>strong,
+.links>a:active>strong,
 .links>a:focus>strong,
-.links>a:hover>strong,
-.links>a:active>strong {
+.links>a:hover>strong {
     color: var(--color-red-R600);
-    transition: color 300ms ease-in-out;
+    transition: color 150ms ease-in-out;
 }
 
+.links>a.focus>strong:after,
+.links>a.hover>strong::after,
+.links>a.active>strong::after,
 .links>a:active>strong:after,
 .links>a:hover>strong:after,
 .links>a:focus>strong:after {
     opacity: .5;
 }
 
+.no-touch-device .links>a>span,
+.links>a.focus>span,
+.links>a.hover>span,
+.links>a.active>span,
 .links>a:active>span,
 .links>a:hover>span,
 .links>a:focus>span {
     transform: translateX(1em);
-    transition: transform 300ms ease-in-out;
+    transition: transform 150ms ease-in-out;
+    background-color: var(--background-alt);
 }
 
+.links>a.focus,
 .links>a:focus {
     outline: none;
     border-bottom: 2px solid var(--color-red-R600);
-}
-
-.links>a:focus>span,
-.links>a:hover>span,
-.links>a:active>span {
-    background-color: var(--background-alt);
 }
 
 @media screen and (min-width: 800px) {
@@ -328,28 +335,9 @@ footer .bottom-border {
     }
 }
 
-@media (pointer: coarse) {
 
-    .links>a:active>strong,
-    .links>a:focus>strong {
-        color: var(--color-red-R600);
-        transition: var(--color-red-R600) 300ms ease-in-out;
-    }
 
-    .links>a:active>span,
-    .links>a:focus>span {
-        background-color: var(--background-alt);
-    }
-}
 
-@media (hover:none) {
-    .links>a>span {
-        transform: translateX(0) !important;
-        /*color: var(--color-red-R600);
-        background-color: var(--color-yellow-Y400);*/
-        transition: none !important;
-    }
-}
 
 /* For screen widths less than 800px, center the `strong` element */
 @media screen and (max-width: 799px) {
@@ -384,19 +372,20 @@ footer .bottom-border {
         height: 0;
         overflow: hidden;
         display: block;
-        transition: opacity 300ms ease-in-out, top 300ms ease-in-out, height 300ms ease-in-out;
-        
+        transition: opacity 150ms ease-in-out, top 150ms ease-in-out, height 150ms ease-in-out;
+
     }
 
+    .no-touch-device .links>a>span,
     .links>a:focus>span,
     .links>a:hover>span,
     .links>a:active>span {
-        /*transform: translateY(0);*/
         opacity: 1;
         top: 0;
         height: auto;
     }
 
+    .no-touch-device .links>a>span,
     .links>a:focus,
     .links>a:hover,
     .links>a:active {
@@ -408,4 +397,13 @@ footer .bottom-border {
     .links>a>span {
         transition: none;
     }
+
+    .links>a>strong {
+        transition: none;
+    }
 }
+
+/* dev tools
+body {
+    pointer-events: none;
+} */
