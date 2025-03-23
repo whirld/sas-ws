@@ -190,9 +190,6 @@ footer .bottom-border {
     border-top: 4px solid var(--border-color);
 }
 
-/* Minimum (1rem): The font size will never go below 1rem.
-  Preferred (1.5vw): This is the ideal, flexible size based on the viewport width.
-  Maximum (2.3rem): The font size will never exceed 2.3rem. */
 .about>* {
     margin: 0 0 1rem;
     font-size: clamp(1rem, 1.5vw, 2rem);
@@ -271,6 +268,7 @@ footer .bottom-border {
     transform: translateY(-50%);
 }
 
+/* Mouse & touch screen responsiveness */
 .links>a.focus>strong,
 .links>a.hover>strong,
 .links>a.active>strong,
@@ -287,10 +285,9 @@ footer .bottom-border {
 .links>a:active>strong:after,
 .links>a:hover>strong:after,
 .links>a:focus>strong:after {
-    opacity: .5;
+    opacity: 1;
 }
 
-.no-touch-device .links>a>span,
 .links>a.focus>span,
 .links>a.hover>span,
 .links>a.active>span,
@@ -308,6 +305,7 @@ footer .bottom-border {
     border-bottom: 2px solid var(--color-red-R600);
 }
 
+/* For screen widths more than 800px, prevent oversize text */
 @media screen and (min-width: 800px) {
     main {
         flex-direction: row;
@@ -334,10 +332,6 @@ footer .bottom-border {
         height: 70%;
     }
 }
-
-
-
-
 
 /* For screen widths less than 800px, center the `strong` element */
 @media screen and (max-width: 799px) {
@@ -376,7 +370,9 @@ footer .bottom-border {
 
     }
 
-    .no-touch-device .links>a>span,
+    .links>a.focus>span,
+    .links>a.hover>span,
+    .links>a.active>span,
     .links>a:focus>span,
     .links>a:hover>span,
     .links>a:active>span {
@@ -385,7 +381,9 @@ footer .bottom-border {
         height: auto;
     }
 
-    .no-touch-device .links>a>span,
+    .links>a.focus,
+    .links>a.hover,
+    .links>a.active,
     .links>a:focus,
     .links>a:hover,
     .links>a:active {
