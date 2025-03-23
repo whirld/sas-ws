@@ -12,6 +12,7 @@ links.forEach(link => {
     link.addEventListener('touchend', function () {
         link.classList.remove('hover');
         link.classList.remove('active');
+        link.classList.remove('focus');
     }, { passive: true });
 
     // Handle "focused" events listeners
